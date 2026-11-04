@@ -1,4 +1,8 @@
+<img src=".claude-plugin/icon.svg" width="88" alt="">
+
 # unroll
+
+Unroll a Twitter/X thread to Markdown, right from your AI agent.
 
 English | [Русский](README.ru.md)
 

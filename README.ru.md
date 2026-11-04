@@ -1,4 +1,8 @@
+<img src=".claude-plugin/icon.svg" width="88" alt="">
+
 # unroll
+
+Тред из Twitter/X в Markdown прямо из вашего ИИ-агента.
 
 [English](README.md) | Русский
 
