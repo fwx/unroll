@@ -1,0 +1,12 @@
+{
+  "name": "unroll",
+  "description": "Unroll an X/Twitter thread into a single Markdown file",
+  "version": "0.1.0",
+  "author": {
+    "name": "fwx",
+    "url": "https://github.com/fwx"
+  },
+  "homepage": "https://github.com/fwx/claude-unroll",
+  "repository": "https://github.com/fwx/claude-unroll",
+  "license": "MIT"
+}

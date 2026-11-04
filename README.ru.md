@@ -1,0 +1,72 @@
+# unroll
+
+[English](README.md) | Русский
+
+Скилл для Claude Code, который сохраняет тред из X/Twitter в один Markdown-файл. Тред здесь означает пост и ответы автора под ним.
+
+Данные берутся из публичного [FxTwitter API](https://docs.fxembed.com/api/introduction/), поэтому аккаунт X, ключ API и браузер не нужны.
+
+## Установка
+
+В Claude Code:
+
+```
+/plugin marketplace add fwx/claude-unroll
+/plugin install unroll@unroll
+```
+
+Или скопируйте `skills/unroll` в `~/.claude/skills/unroll` вручную.
+
+## Использование
+
+Дайте Claude ссылку:
+
+> сохрани тред в markdown https://x.com/user/status/123
+
+Или вызовите скилл напрямую:
+
+```
+/unroll:unroll https://x.com/user/status/123
+```
+
+Подойдёт ссылка на любой твит треда: первый, последний или из середины.
+
+Скрипт работает и без Claude. Нужен Node.js 18+, зависимостей нет:
+
+```bash
+node skills/unroll/scripts/unroll.mjs https://x.com/user/status/123 -o thread.md
+```
+
+## Что получается
+
+```markdown
+---
+author: "@user"
+name: "User Name"
+date: 2026-11-04
+source: https://x.com/user/status/123
+tweets: 19
+---
+
+# Первая строка треда
+
+*[@user](https://x.com/user) · 2026-11-04*
+
+Текст первого твита...
+
+---
+
+Текст второго твита...
+```
+
+Картинки вставляются как `![](url)`. Видео и GIF превращаются в превью со ссылкой на mp4. Цитируемые твиты попадают в блок `>` со ссылкой на источник.
+
+## Ограничения
+
+- Сохраняются только твиты автора, ответы других людей отбрасываются.
+- Если `api.fxtwitter.com` лежит, скрипт ничего не скачает. Лимит 1000 запросов в минуту с одного IP, один тред стоит один запрос.
+- Удалённые и закрытые твиты получить нельзя.
+
+## Лицензия
+
+[MIT](LICENSE)

@@ -1,0 +1,14 @@
+{
+  "name": "unroll",
+  "description": "Unroll X/Twitter threads into Markdown",
+  "owner": {
+    "name": "fwx"
+  },
+  "plugins": [
+    {
+      "name": "unroll",
+      "source": "./",
+      "description": "Unroll an X/Twitter thread into a single Markdown file"
+    }
+  ]
+}
