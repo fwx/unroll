@@ -43,7 +43,7 @@ Fetches an X/Twitter thread as Markdown (to stdout or a file) using the public F
 
 The output covers the reply chain around the linked tweet: the author's self-replies, plus
 other people's tweets the author was answering. When more than one person posts in it, each
-tweet starts with a bold `@handle` link and the frontmatter lists `participants`. The
+tweet starts with a bold `@handle` and the frontmatter lists `participants`. The
 auto-added `@user` prefixes of replies are stripped. Other replies under the post (side
 branches) are not included.
 

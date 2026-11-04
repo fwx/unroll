@@ -78,7 +78,7 @@ participants: ["@sama", "@HarshithLucky3", "@jestermolecule"]
 
 *[@sama](https://x.com/sama) · 2026-11-04*
 
-**[@sama](https://x.com/sama/status/2117794005165748448)**
+**@sama**
 
 OpenAI is against the notion that it would be acceptable for people to be relegated to a role of doing things that “AI systems think makes sense to reward in humans”.
 
@@ -86,7 +86,7 @@ People should not cede control of the future to superintelligence, and that requ
 
 ---
 
-**[@HarshithLucky3](https://x.com/HarshithLucky3/status/2117800795047592049)**
+**@HarshithLucky3**
 
 sam come here come here
 
@@ -94,19 +94,19 @@ sam come here come here
 
 ---
 
-**[@sama](https://x.com/sama/status/2117844267020492948)**
+**@sama**
 
 i lol'd
 
 ---
 
-**[@jestermolecule](https://x.com/jestermolecule/status/2117844478702608437)**
+**@jestermolecule**
 
 can u rename your x to ram altman!
 
 ---
 
-**[@sama](https://x.com/sama/status/2117845542021808438)**
+**@sama**
 
 ok yeah
 

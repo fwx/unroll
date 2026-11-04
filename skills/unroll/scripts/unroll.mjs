@@ -58,7 +58,7 @@ function quoteMd(q) {
 }
 
 function tweetMd(t, labelAuthor) {
-  const label = labelAuthor ? `**[@${t.author.screen_name}](${t.url})**` : "";
+  const label = labelAuthor ? `**@${t.author.screen_name}**` : "";
   return [label, t.text, mediaMd(t.media), quoteMd(t.quote)].filter(Boolean).join("\n\n");
 }
 
