@@ -1,6 +1,7 @@
 ---
 name: unroll
 description: Unroll an X/Twitter thread (an author's chain of self-replies) into a single Markdown file. Use when the user shares an x.com or twitter.com status link and wants the thread saved, exported, converted to markdown, archived, or read as one document. Triggers include "unroll this thread", "save this thread", "thread to markdown", "тред в markdown", "сохрани тред", "разверни тред".
+compatibility: Requires Node.js 18+ and network access to api.fxtwitter.com
 argument-hint: <x.com status URL> [output.md]
 allowed-tools: Bash(node ${CLAUDE_SKILL_DIR}/scripts/unroll.mjs *)
 ---
@@ -12,14 +13,15 @@ Converts an X/Twitter thread into one Markdown file using the public FxTwitter A
 
 ## Steps
 
-1. Take the tweet URL (or bare status ID) from the user's message or `$ARGUMENTS`.
+1. Take the tweet URL (or bare status ID) from the user's message or the skill arguments.
    Any tweet of the thread works: first, middle, or last.
 2. Decide where to save. If the user named a path, pass it with `-o`. Otherwise omit `-o`;
    the script writes `<author>-<first-tweet-id>.md` into the current working directory.
-3. Run:
+3. Run the bundled script. `scripts/unroll.mjs` is relative to this skill's directory
+   (the folder containing this SKILL.md); build the absolute path from it:
 
    ```bash
-   node ${CLAUDE_SKILL_DIR}/scripts/unroll.mjs "<url>" [-o <path.md>]
+   node <skill-dir>/scripts/unroll.mjs "<url>" [-o <path.md>]
    ```
 
    Requires Node.js 18+. On success it prints `✓ N tweets → <file>` to stderr.

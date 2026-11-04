@@ -11,7 +11,7 @@
 В Claude Code:
 
 ```
-/plugin marketplace add fwx/claude-unroll
+/plugin marketplace add fwx/unroll
 /plugin install unroll@unroll
 ```
 
@@ -36,6 +36,18 @@
 ```bash
 node skills/unroll/scripts/unroll.mjs https://x.com/user/status/123 -o thread.md
 ```
+
+## Другие агенты
+
+`SKILL.md` написан по открытому формату [Agent Skills](https://agentskills.io/specification), так что та же папка работает и вне Claude Code. Склонируйте репозиторий и сделайте ссылку (или скопируйте) `skills/unroll` в папку скиллов агента:
+
+```bash
+git clone https://github.com/fwx/unroll.git
+ln -s "$PWD/unroll/skills/unroll" ~/.omp/agent/skills/unroll   # oh-my-pi
+ln -s "$PWD/unroll/skills/unroll" ~/.codex/skills/unroll       # Codex
+```
+
+Для одного проекта подойдёт `.omp/skills/` или `.agents/skills/` внутри репозитория. Проверено на omp 18.12, путь для Codex взят из его документации и пока не проверялся.
 
 ## Что получается
 

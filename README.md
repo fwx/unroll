@@ -11,7 +11,7 @@ It pulls data from the public [FxTwitter API](https://docs.fxembed.com/api/intro
 In Claude Code:
 
 ```
-/plugin marketplace add fwx/claude-unroll
+/plugin marketplace add fwx/unroll
 /plugin install unroll@unroll
 ```
 
@@ -36,6 +36,18 @@ The script runs fine without Claude too. It needs Node.js 18+ and has no depende
 ```bash
 node skills/unroll/scripts/unroll.mjs https://x.com/user/status/123 -o thread.md
 ```
+
+## Other agents
+
+`SKILL.md` follows the open [Agent Skills](https://agentskills.io/specification) format, so the same folder works outside Claude Code. Clone the repo and link (or copy) `skills/unroll` into the agent's skills directory:
+
+```bash
+git clone https://github.com/fwx/unroll.git
+ln -s "$PWD/unroll/skills/unroll" ~/.omp/agent/skills/unroll   # oh-my-pi
+ln -s "$PWD/unroll/skills/unroll" ~/.codex/skills/unroll       # Codex
+```
+
+For a single project, use `.omp/skills/` or `.agents/skills/` inside the repo instead. Checked with omp 18.12; the Codex path comes from its docs and hasn't been tested yet.
 
 ## Output
 
