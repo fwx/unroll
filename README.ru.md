@@ -58,27 +58,64 @@ ln -s "$PWD/unroll/skills/unroll" ~/.codex/skills/unroll       # Codex
 
 ## Что получается
 
-```markdown
----
-author: "@user"
-name: "User Name"
-date: 2026-11-04
-source: https://x.com/user/status/123
-tweets: 19
----
+Настоящий запуск на ответе Сэма Альтмана, обрезан после пяти твитов. Ссылка ведёт глубоко в ответы, поэтому файл начинается с исходного поста и спускается к ней:
 
-# Первая строка треда
-
-*[@user](https://x.com/user) · 2026-11-04*
-
-Текст первого твита...
-
----
-
-Текст второго твита...
+```bash
+node skills/unroll/scripts/unroll.mjs https://x.com/sama/status/2117845542021808438
 ```
 
-Картинки вставляются как `![](url)`. Видео и GIF превращаются в превью со ссылкой на mp4. Цитируемые твиты попадают в блок `>` со ссылкой на источник.
+```markdown
+---
+author: "@sama"
+name: "Sam Altman"
+date: 2026-11-04
+source: https://x.com/sama/status/2117794005165748448
+tweets: 6
+participants: ["@sama", "@HarshithLucky3", "@jestermolecule"]
+---
+
+# People should always be in control of the future.
+
+*[@sama](https://x.com/sama) · 2026-11-04*
+
+**[@sama](https://x.com/sama/status/2117794005165748448)**
+
+OpenAI is against the notion that it would be acceptable for people to be relegated to a role of doing things that “AI systems think makes sense to reward in humans”.
+
+People should not cede control of the future to superintelligence, and that requirement should ultimately constrain AI progress.
+
+---
+
+**[@HarshithLucky3](https://x.com/HarshithLucky3/status/2117800795047592049)**
+
+sam come here come here
+
+![](https://pbs.twimg.com/media/HWPwXIkbkAAMaJD.png?name=orig)
+
+---
+
+**[@sama](https://x.com/sama/status/2117844267020492948)**
+
+i lol'd
+
+---
+
+**[@jestermolecule](https://x.com/jestermolecule/status/2117844478702608437)**
+
+can u rename your x to ram altman!
+
+---
+
+**[@sama](https://x.com/sama/status/2117845542021808438)**
+
+ok yeah
+
+---
+
+...
+```
+
+В треде с одним автором подписей `@ник` и поля `participants` нет. Картинки вставляются как `![](url)`. Видео и GIF превращаются в превью со ссылкой на mp4. Цитируемые твиты попадают в блок `>` со ссылкой на источник.
 
 ## Ограничения
 
