@@ -4,7 +4,7 @@
 
 Скилл для ИИ-агентов, который достаёт тред из X/Twitter в виде Markdown: агент может его прочитать, пересказать или сохранить в файл. Подходит и для обычного треда (пост и ответы автора под ним), и для ветки, где автор переписывается с другими людьми.
 
-Написан по открытому формату [Agent Skills](https://agentskills.io/specification). Проверен в Claude Code и oh-my-pi; Codex и другие агенты, которые читают `SKILL.md`, тоже должны подойти, см. [Другие агенты](#другие-агенты).
+Написан по открытому формату [Agent Skills](https://agentskills.io/specification). Проверен в Claude Code, oh-my-pi и Codex. Другие агенты, которые читают `SKILL.md`, тоже должны подойти, см. [Другие агенты](#другие-агенты).
 
 Данные берутся из публичного [FxTwitter API](https://docs.fxembed.com/api/introduction/), поэтому аккаунт X, ключ API и браузер не нужны.
 
@@ -54,7 +54,14 @@ ln -s "$PWD/unroll/skills/unroll" ~/.omp/agent/skills/unroll   # oh-my-pi
 ln -s "$PWD/unroll/skills/unroll" ~/.codex/skills/unroll       # Codex
 ```
 
-Для одного проекта подойдёт `.omp/skills/` или `.agents/skills/` внутри репозитория. Проверено на omp 18.12, путь для Codex взят из его документации и пока не проверялся.
+Для одного проекта подойдёт `.omp/skills/` или `.agents/skills/` внутри репозитория. Проверено на omp 18.12 и Codex 0.153.
+
+В песочнице Codex по умолчанию нет сети, и скрипт не достучится до `api.fxtwitter.com`. Если он падает с сетевой ошибкой, добавьте в `~/.codex/config.toml`:
+
+```toml
+[sandbox_workspace_write]
+network_access = true
+```
 
 ## Что получается
 

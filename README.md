@@ -4,7 +4,7 @@ English | [Русский](README.ru.md)
 
 An agent skill that pulls an X/Twitter thread into clean Markdown, so your agent can read it, summarize it, or save it to a file. That covers a classic thread (a post plus the author's replies under it) and a reply chain where the author talks to other people.
 
-It uses the open [Agent Skills](https://agentskills.io/specification) format. Tested in Claude Code and oh-my-pi; Codex and other agents that read `SKILL.md` should work too, see [Other agents](#other-agents).
+It uses the open [Agent Skills](https://agentskills.io/specification) format. Tested in Claude Code, oh-my-pi, and Codex. Other agents that read `SKILL.md` should work too, see [Other agents](#other-agents).
 
 It pulls data from the public [FxTwitter API](https://docs.fxembed.com/api/introduction/), so you don't need an X account, an API key, or a headless browser.
 
@@ -54,7 +54,14 @@ ln -s "$PWD/unroll/skills/unroll" ~/.omp/agent/skills/unroll   # oh-my-pi
 ln -s "$PWD/unroll/skills/unroll" ~/.codex/skills/unroll       # Codex
 ```
 
-For a single project, use `.omp/skills/` or `.agents/skills/` inside the repo instead. Checked with omp 18.12; the Codex path comes from its docs and hasn't been tested yet.
+For a single project, use `.omp/skills/` or `.agents/skills/` inside the repo instead. Checked with omp 18.12 and Codex 0.153.
+
+Codex's sandbox has no network by default, so the script can't reach `api.fxtwitter.com` there. If it fails with a network error, add this to `~/.codex/config.toml`:
+
+```toml
+[sandbox_workspace_write]
+network_access = true
+```
 
 ## Output
 
