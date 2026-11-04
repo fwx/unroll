@@ -47,13 +47,13 @@ function mediaMd(media) {
 
 function quoteMd(q) {
   if (!q) return "";
-  const body = [`**@${q.author.screen_name}**: ${q.text}`, mediaMd(q.media)]
+  const body = [`**@${q.author.screen_name}**: ${stripReplyMentions(q)}`, mediaMd(q.media)]
     .filter(Boolean)
     .join("\n\n");
   return body
     .split("\n")
     .map((l) => `> ${l}`)
-    .concat(`> — [source](${q.url})`)
+    .concat(`> [source](${q.url})`)
     .join("\n");
 }
 
