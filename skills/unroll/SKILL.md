@@ -8,7 +8,7 @@ allowed-tools: Bash(node ${CLAUDE_SKILL_DIR}/scripts/unroll.mjs *)
 
 # unroll
 
-Converts an X/Twitter thread into one Markdown file using the public FxTwitter API
+Fetches an X/Twitter thread as Markdown (to stdout or a file) using the public FxTwitter API
 (`https://api.fxtwitter.com/2/thread/<id>`). No X account, API key, or browser automation needed.
 
 ## Steps

@@ -2,7 +2,7 @@
 
 English | [Русский](README.ru.md)
 
-An agent skill that saves an X/Twitter thread as one Markdown file. A thread here means a post plus the author's own replies under it.
+An agent skill that pulls an X/Twitter thread into clean Markdown, so your agent can read it, summarize it, or save it to a file. A thread here means a post plus the author's own replies under it.
 
 It uses the open [Agent Skills](https://agentskills.io/specification) format. Tested in Claude Code and oh-my-pi; Codex and other agents that read `SKILL.md` should work too, see [Other agents](#other-agents).
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// unroll: turns an X/Twitter thread into a single Markdown file.
+// unroll: fetches an X/Twitter thread as Markdown, to a file or stdout.
 // Usage: node unroll.mjs <url of any tweet in the thread> [-o out.md | -o - for stdout]
 
 import { writeFileSync } from "node:fs";

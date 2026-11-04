@@ -8,7 +8,7 @@
     {
       "name": "unroll",
       "source": "./",
-      "description": "Unroll an X/Twitter thread into a single Markdown file"
+      "description": "Pull an X/Twitter thread into Markdown to read, summarize, or save"
     }
   ]
 }
