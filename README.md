@@ -37,11 +37,11 @@ $unroll https://x.com/user/status/123          # Codex
 
 Any tweet from the thread works: the first one, the last one, or one in the middle.
 
-The script runs fine without any agent too. It needs Node.js 18+ and has no dependencies:
+The script runs fine without any agent too. It needs Python 3.8+ and nothing else, only the standard library:
 
 ```bash
-node skills/unroll/scripts/unroll.mjs https://x.com/user/status/123 -o thread.md
-node skills/unroll/scripts/unroll.mjs https://x.com/user/status/123 -o -   # print to stdout
+python3 skills/unroll/scripts/unroll.py https://x.com/user/status/123 -o thread.md
+python3 skills/unroll/scripts/unroll.py https://x.com/user/status/123 -o -   # print to stdout
 ```
 
 ## Other agents
@@ -61,7 +61,7 @@ For a single project, use `.omp/skills/` or `.agents/skills/` inside the repo in
 A real run on a reply by Sam Altman, cut after five tweets. The link points deep into the replies, so the file starts at the original post and walks down to it:
 
 ```bash
-node skills/unroll/scripts/unroll.mjs https://x.com/sama/status/2117845542021808438
+python3 skills/unroll/scripts/unroll.py https://x.com/sama/status/2117845542021808438
 ```
 
 ```markdown

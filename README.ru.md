@@ -37,11 +37,11 @@ $unroll https://x.com/user/status/123          # Codex
 
 Подойдёт ссылка на любой твит треда: первый, последний или из середины.
 
-Скрипт работает и без агента. Нужен Node.js 18+, зависимостей нет:
+Скрипт работает и без агента. Нужен Python 3.8+, сторонних библиотек нет:
 
 ```bash
-node skills/unroll/scripts/unroll.mjs https://x.com/user/status/123 -o thread.md
-node skills/unroll/scripts/unroll.mjs https://x.com/user/status/123 -o -   # вывод в stdout
+python3 skills/unroll/scripts/unroll.py https://x.com/user/status/123 -o thread.md
+python3 skills/unroll/scripts/unroll.py https://x.com/user/status/123 -o -   # вывод в stdout
 ```
 
 ## Другие агенты
@@ -61,7 +61,7 @@ ln -s "$PWD/unroll/skills/unroll" ~/.codex/skills/unroll       # Codex
 Настоящий запуск на ответе Сэма Альтмана, обрезан после пяти твитов. Ссылка ведёт глубоко в ответы, поэтому файл начинается с исходного поста и спускается к ней:
 
 ```bash
-node skills/unroll/scripts/unroll.mjs https://x.com/sama/status/2117845542021808438
+python3 skills/unroll/scripts/unroll.py https://x.com/sama/status/2117845542021808438
 ```
 
 ```markdown
