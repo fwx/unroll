@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="112" fill="#F6F1E7"/>
+  <!-- spool -->
+  <rect x="116" y="118" width="80" height="112" fill="#E4572E"/>
+  <g stroke="#F6F1E7" stroke-width="5" stroke-linecap="round" opacity="0.55">
+    <line x1="124" y1="142" x2="188" y2="142"/>
+    <line x1="124" y1="164" x2="188" y2="164"/>
+    <line x1="124" y1="186" x2="188" y2="186"/>
+  </g>
+  <rect x="96" y="96" width="120" height="26" rx="10" fill="#1F2430"/>
+  <rect x="96" y="226" width="120" height="26" rx="10" fill="#1F2430"/>
+  <!-- thread leaves the spool, drops, and straightens into the heading line -->
+  <path d="M188 208 C 236 208, 236 300, 290 300 L 404 300" fill="none" stroke="#E4572E" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- body text lines -->
+  <g stroke="#1F2430" stroke-width="20" stroke-linecap="round">
+    <line x1="108" y1="360" x2="404" y2="360"/>
+    <line x1="108" y1="412" x2="320" y2="412"/>
+  </g>
+</svg>
