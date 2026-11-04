@@ -12,6 +12,8 @@
 
 Данные берутся из публичного [FxTwitter API](https://docs.fxembed.com/api/introduction/), поэтому аккаунт X, ключ API и браузер не нужны.
 
+![демо unroll: агент пересказывает тред из X](assets/demo.gif)
+
 ## Установка в Claude Code
 
 ```

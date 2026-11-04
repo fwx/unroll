@@ -12,6 +12,8 @@ It uses the open [Agent Skills](https://agentskills.io/specification) format. Te
 
 It pulls data from the public [FxTwitter API](https://docs.fxembed.com/api/introduction/), so you don't need an X account, an API key, or a headless browser.
 
+![unroll demo: an agent summarizes an X thread](assets/demo.gif)
+
 ## Install in Claude Code
 
 ```
