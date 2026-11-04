@@ -1,4 +1,4 @@
-<img src=".claude-plugin/icon.svg" width="88" alt="">
+<p align="center"><img src=".claude-plugin/icon.svg" width="88" alt=""></p>
 
 # unroll
 
