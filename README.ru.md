@@ -2,13 +2,13 @@
 
 [English](README.md) | Русский
 
-Скилл для Claude Code, который сохраняет тред из X/Twitter в один Markdown-файл. Тред здесь означает пост и ответы автора под ним.
+Скилл для ИИ-агентов, который сохраняет тред из X/Twitter в один Markdown-файл. Тред здесь означает пост и ответы автора под ним.
+
+Написан по открытому формату [Agent Skills](https://agentskills.io/specification). Проверен в Claude Code и oh-my-pi; Codex и другие агенты, которые читают `SKILL.md`, тоже должны подойти, см. [Другие агенты](#другие-агенты).
 
 Данные берутся из публичного [FxTwitter API](https://docs.fxembed.com/api/introduction/), поэтому аккаунт X, ключ API и браузер не нужны.
 
-## Установка
-
-В Claude Code:
+## Установка в Claude Code
 
 ```
 /plugin marketplace add fwx/unroll
@@ -19,19 +19,21 @@
 
 ## Использование
 
-Дайте Claude ссылку:
+Дайте агенту ссылку:
 
 > сохрани тред в markdown https://x.com/user/status/123
 
 Или вызовите скилл напрямую:
 
 ```
-/unroll:unroll https://x.com/user/status/123
+/unroll:unroll https://x.com/user/status/123   # Claude Code
+/skill:unroll https://x.com/user/status/123    # oh-my-pi
+$unroll https://x.com/user/status/123          # Codex
 ```
 
 Подойдёт ссылка на любой твит треда: первый, последний или из середины.
 
-Скрипт работает и без Claude. Нужен Node.js 18+, зависимостей нет:
+Скрипт работает и без агента. Нужен Node.js 18+, зависимостей нет:
 
 ```bash
 node skills/unroll/scripts/unroll.mjs https://x.com/user/status/123 -o thread.md
@@ -39,7 +41,7 @@ node skills/unroll/scripts/unroll.mjs https://x.com/user/status/123 -o thread.md
 
 ## Другие агенты
 
-`SKILL.md` написан по открытому формату [Agent Skills](https://agentskills.io/specification), так что та же папка работает и вне Claude Code. Склонируйте репозиторий и сделайте ссылку (или скопируйте) `skills/unroll` в папку скиллов агента:
+Склонируйте репозиторий и сделайте ссылку (или скопируйте) `skills/unroll` в папку скиллов агента:
 
 ```bash
 git clone https://github.com/fwx/unroll.git

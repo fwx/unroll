@@ -2,13 +2,13 @@
 
 English | [Русский](README.ru.md)
 
-A Claude Code skill that saves an X/Twitter thread as one Markdown file. A thread here means a post plus the author's own replies under it.
+An agent skill that saves an X/Twitter thread as one Markdown file. A thread here means a post plus the author's own replies under it.
+
+It uses the open [Agent Skills](https://agentskills.io/specification) format. Tested in Claude Code and oh-my-pi; Codex and other agents that read `SKILL.md` should work too, see [Other agents](#other-agents).
 
 It pulls data from the public [FxTwitter API](https://docs.fxembed.com/api/introduction/), so you don't need an X account, an API key, or a headless browser.
 
-## Install
-
-In Claude Code:
+## Install in Claude Code
 
 ```
 /plugin marketplace add fwx/unroll
@@ -19,19 +19,21 @@ Or copy `skills/unroll` to `~/.claude/skills/unroll` by hand.
 
 ## Use
 
-Give Claude a link:
+Give your agent a link:
 
 > save this thread as markdown https://x.com/user/status/123
 
 Or call the skill directly:
 
 ```
-/unroll:unroll https://x.com/user/status/123
+/unroll:unroll https://x.com/user/status/123   # Claude Code
+/skill:unroll https://x.com/user/status/123    # oh-my-pi
+$unroll https://x.com/user/status/123          # Codex
 ```
 
 Any tweet from the thread works: the first one, the last one, or one in the middle.
 
-The script runs fine without Claude too. It needs Node.js 18+ and has no dependencies:
+The script runs fine without any agent too. It needs Node.js 18+ and has no dependencies:
 
 ```bash
 node skills/unroll/scripts/unroll.mjs https://x.com/user/status/123 -o thread.md
@@ -39,7 +41,7 @@ node skills/unroll/scripts/unroll.mjs https://x.com/user/status/123 -o thread.md
 
 ## Other agents
 
-`SKILL.md` follows the open [Agent Skills](https://agentskills.io/specification) format, so the same folder works outside Claude Code. Clone the repo and link (or copy) `skills/unroll` into the agent's skills directory:
+Clone the repo and link (or copy) `skills/unroll` into the agent's skills directory:
 
 ```bash
 git clone https://github.com/fwx/unroll.git
