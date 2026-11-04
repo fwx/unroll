@@ -46,7 +46,13 @@ python3 skills/unroll/scripts/unroll.py https://x.com/user/status/123 -o -   # �
 
 ## Другие агенты
 
-Склонируйте репозиторий и сделайте ссылку (или скопируйте) `skills/unroll` в папку скиллов агента:
+Быстрее всего через CLI [`skills`](https://skills.sh). Он спросит, в какие агенты ставить (Codex, Cursor, omp и другие):
+
+```bash
+npx skills add fwx/unroll
+```
+
+Или вручную: склонируйте репозиторий и сделайте ссылку (или скопируйте) `skills/unroll` в папку скиллов агента:
 
 ```bash
 git clone https://github.com/fwx/unroll.git

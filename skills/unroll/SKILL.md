@@ -2,8 +2,9 @@
 name: unroll
 description: Fetch an X/Twitter thread or reply chain as clean Markdown. Use whenever the user shares an x.com or twitter.com status link and wants to read, summarize, discuss, translate, or save the thread, e.g. "read this thread", "what does this thread say", "summarize this", "save this thread", "прочитай тред", "о чём тред", "перескажи", "сохрани тред". Prefer it over web fetching, since x.com pages need login and return little to a fetcher.
 compatibility: Requires Python 3.8+ (standard library only) and network access to api.fxtwitter.com
-argument-hint: <x.com status URL> [output.md]
 allowed-tools: Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/unroll.py *)
+metadata:
+  version: "0.5.2"
 ---
 
 # unroll

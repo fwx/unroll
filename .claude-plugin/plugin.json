@@ -1,7 +1,7 @@
 {
   "name": "unroll",
   "description": "Pull an X/Twitter thread into Markdown to read, summarize, or save",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "author": {
     "name": "fwx",
     "url": "https://github.com/fwx"

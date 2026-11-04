@@ -46,7 +46,13 @@ python3 skills/unroll/scripts/unroll.py https://x.com/user/status/123 -o -   # p
 
 ## Other agents
 
-Clone the repo and link (or copy) `skills/unroll` into the agent's skills directory:
+The quickest way is the [`skills`](https://skills.sh) CLI. It asks which agents to install to (Codex, Cursor, omp and others):
+
+```bash
+npx skills add fwx/unroll
+```
+
+Or do it by hand: clone the repo and link (or copy) `skills/unroll` into the agent's skills directory:
 
 ```bash
 git clone https://github.com/fwx/unroll.git
