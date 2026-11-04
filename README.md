@@ -19,9 +19,13 @@ Or copy `skills/unroll` to `~/.claude/skills/unroll` by hand.
 
 ## Use
 
-Give your agent a link:
+Give your agent a link and ask in your own words. No magic phrase needed:
 
-> save this thread as markdown https://x.com/user/status/123
+> read this thread and tell me what it's about https://x.com/user/status/123
+
+> save this thread https://x.com/user/status/123
+
+If you ask to read, summarize, or translate, the agent gets the thread as text and no file is created. If you ask to save, it writes `<author>-<id>.md`.
 
 Or call the skill directly:
 
@@ -37,6 +41,7 @@ The script runs fine without any agent too. It needs Node.js 18+ and has no depe
 
 ```bash
 node skills/unroll/scripts/unroll.mjs https://x.com/user/status/123 -o thread.md
+node skills/unroll/scripts/unroll.mjs https://x.com/user/status/123 -o -   # print to stdout
 ```
 
 ## Other agents

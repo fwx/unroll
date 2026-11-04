@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // unroll: turns an X/Twitter thread into a single Markdown file.
-// Usage: node unroll.mjs <url of any tweet in the thread> [-o out.md]
+// Usage: node unroll.mjs <url of any tweet in the thread> [-o out.md | -o - for stdout]
 
 import { writeFileSync } from "node:fs";
 
@@ -81,12 +81,16 @@ async function main() {
   const oIdx = args.indexOf("-o");
   const out = oIdx >= 0 ? args.splice(oIdx, 2)[1] : null;
   if (!args[0]) {
-    console.error("Usage: node unroll.mjs <tweet url> [-o out.md]");
+    console.error("Usage: node unroll.mjs <tweet url> [-o out.md | -o -]");
     process.exit(1);
   }
 
   const tweets = await collectThread(parseId(args[0]));
   const md = toMarkdown(tweets);
+  if (out === "-") {
+    process.stdout.write(md);
+    return;
+  }
   const file = out ?? `${tweets[0].author.screen_name}-${tweets[0].id}.md`;
   writeFileSync(file, md);
   console.error(`✓ ${tweets.length} tweets → ${file}`);

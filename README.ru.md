@@ -19,9 +19,13 @@
 
 ## Использование
 
-Дайте агенту ссылку:
+Дайте агенту ссылку и попросите своими словами, волшебная фраза не нужна:
 
-> сохрани тред в markdown https://x.com/user/status/123
+> прочитай тред и скажи, о чём он https://x.com/user/status/123
+
+> сохрани тред https://x.com/user/status/123
+
+Если просите прочитать, пересказать или перевести, агент получает тред текстом и файл не создаётся. Если просите сохранить, появится `<автор>-<id>.md`.
 
 Или вызовите скилл напрямую:
 
@@ -37,6 +41,7 @@ $unroll https://x.com/user/status/123          # Codex
 
 ```bash
 node skills/unroll/scripts/unroll.mjs https://x.com/user/status/123 -o thread.md
+node skills/unroll/scripts/unroll.mjs https://x.com/user/status/123 -o -   # вывод в stdout
 ```
 
 ## Другие агенты
