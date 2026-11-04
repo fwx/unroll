@@ -12,19 +12,25 @@ function parseId(input) {
   return m[1];
 }
 
-// fxtwitter /2/thread/<id> returns the author's whole self-reply chain,
-// no matter which tweet of the thread you start from.
+// fxtwitter /2/thread/<id> returns the reply chain around the tweet: the author's
+// whole self-reply thread, plus other people's tweets if the author was replying to them.
 async function collectThread(id) {
   const res = await fetch(API + id, { headers: { "User-Agent": "unroll" } });
   const data = await res.json().catch(() => null);
   if (!res.ok || !data?.status) {
     throw new Error(`Failed to fetch thread ${id}: ${data?.message ?? res.status}`);
   }
-  const author = data.status.author.screen_name.toLowerCase();
   const thread = data.thread?.length ? data.thread : [data.status];
   return thread
-    .filter((t) => t.author.screen_name.toLowerCase() === author)
+    .map((t) => ({ ...t, text: stripReplyMentions(t) }))
     .sort((a, b) => a.created_timestamp - b.created_timestamp);
+}
+
+// Replies start with auto-added "@user @user". display_text_range[0] marks where
+// the tweet's own text begins (in code points), so cut everything before it.
+function stripReplyMentions(t) {
+  const start = t.raw_text?.display_text_range?.[0] ?? 0;
+  return start > 0 ? Array.from(t.text).slice(start).join("").trimStart() : t.text;
 }
 
 function mediaMd(media) {
@@ -51,15 +57,22 @@ function quoteMd(q) {
     .join("\n");
 }
 
-function tweetMd(t) {
-  return [t.text, mediaMd(t.media), quoteMd(t.quote)].filter(Boolean).join("\n\n");
+function tweetMd(t, labelAuthor) {
+  const label = labelAuthor ? `**[@${t.author.screen_name}](${t.url})**` : "";
+  return [label, t.text, mediaMd(t.media), quoteMd(t.quote)].filter(Boolean).join("\n\n");
 }
 
 function toMarkdown(tweets) {
   const first = tweets[0];
   const a = first.author;
   const date = new Date(first.created_timestamp * 1000).toISOString().slice(0, 10);
-  const title = first.text.split("\n")[0].slice(0, 80).trim().replace(/"/g, "'");
+  const [firstLine, ...rest] = first.text.split("\n");
+  const fits = firstLine.trim().length <= 80;
+  const title = (fits ? firstLine : firstLine.slice(0, 80)).trim().replace(/"/g, "'");
+  // If the whole first line became the title, don't repeat it in the body.
+  if (fits) tweets = [{ ...first, text: rest.join("\n").trim() }, ...tweets.slice(1)];
+
+  const participants = [...new Set(tweets.map((t) => t.author.screen_name))];
 
   const front = [
     "---",
@@ -68,11 +81,12 @@ function toMarkdown(tweets) {
     `date: ${date}`,
     `source: ${first.url}`,
     `tweets: ${tweets.length}`,
+    ...(participants.length > 1 ? [`participants: [${participants.map((p) => `"@${p}"`).join(", ")}]`] : []),
     "---",
   ].join("\n");
 
   const header = `# ${title}\n\n*[@${a.screen_name}](${a.url}) · ${date}*`;
-  const body = tweets.map(tweetMd).join("\n\n---\n\n");
+  const body = tweets.map((t) => tweetMd(t, participants.length > 1)).join("\n\n---\n\n");
   return `${front}\n\n${header}\n\n${body}\n`;
 }
 
@@ -93,7 +107,7 @@ async function main() {
   }
   const file = out ?? `${tweets[0].author.screen_name}-${tweets[0].id}.md`;
   writeFileSync(file, md);
-  console.error(`✓ ${tweets.length} tweets → ${file}`);
+  console.error(`✓ ${tweets.length} tweet${tweets.length === 1 ? "" : "s"} → ${file}`);
 }
 
 main().catch((e) => {

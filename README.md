@@ -2,7 +2,7 @@
 
 English | [Русский](README.ru.md)
 
-An agent skill that pulls an X/Twitter thread into clean Markdown, so your agent can read it, summarize it, or save it to a file. A thread here means a post plus the author's own replies under it.
+An agent skill that pulls an X/Twitter thread into clean Markdown, so your agent can read it, summarize it, or save it to a file. That covers a classic thread (a post plus the author's replies under it) and a reply chain where the author talks to other people.
 
 It uses the open [Agent Skills](https://agentskills.io/specification) format. Tested in Claude Code and oh-my-pi; Codex and other agents that read `SKILL.md` should work too, see [Other agents](#other-agents).
 
@@ -82,7 +82,7 @@ Photos become `![](url)`. Videos and GIFs become a thumbnail that links to the m
 
 ## Limits
 
-- Only the author's tweets are kept. Replies from other people are dropped.
+- You get one branch: the chain that leads to and continues from the linked tweet. Other replies under the post are left out. When several people post in the branch, each tweet is labeled with its author.
 - If `api.fxtwitter.com` is down, the script can't fetch anything. The limit is 1000 requests per minute per IP, and one thread costs one request.
 - Deleted and protected tweets are out of reach.
 

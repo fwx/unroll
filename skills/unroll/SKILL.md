@@ -1,6 +1,6 @@
 ---
 name: unroll
-description: Fetch an X/Twitter thread (a post plus the author's own replies) as clean Markdown. Use whenever the user shares an x.com or twitter.com status link and wants to read, summarize, discuss, translate, or save the thread, e.g. "read this thread", "what does this thread say", "summarize this", "save this thread", "прочитай тред", "о чём тред", "перескажи", "сохрани тред". Prefer it over web fetching, since x.com pages need login and return little to a fetcher.
+description: Fetch an X/Twitter thread or reply chain as clean Markdown. Use whenever the user shares an x.com or twitter.com status link and wants to read, summarize, discuss, translate, or save the thread, e.g. "read this thread", "what does this thread say", "summarize this", "save this thread", "прочитай тред", "о чём тред", "перескажи", "сохрани тред". Prefer it over web fetching, since x.com pages need login and return little to a fetcher.
 compatibility: Requires Node.js 18+ and network access to api.fxtwitter.com
 argument-hint: <x.com status URL> [output.md]
 allowed-tools: Bash(node ${CLAUDE_SKILL_DIR}/scripts/unroll.mjs *)
@@ -41,7 +41,11 @@ Fetches an X/Twitter thread as Markdown (to stdout or a file) using the public F
 - Photos as `![](url)`, videos and GIFs as a thumbnail linking to the mp4
 - Quoted tweets as a `>` blockquote with a source link
 
-Only the thread author's own tweets are included; replies from other people are skipped.
+The output covers the reply chain around the linked tweet: the author's self-replies, plus
+other people's tweets the author was answering. When more than one person posts in it, each
+tweet starts with a bold `@handle` link and the frontmatter lists `participants`. The
+auto-added `@user` prefixes of replies are stripped. Other replies under the post (side
+branches) are not included.
 
 ## Errors
 
