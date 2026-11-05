@@ -4,7 +4,7 @@ description: Fetch an X/Twitter thread or reply chain as clean Markdown. Use whe
 compatibility: Requires Python 3.8+ (standard library only) and network access to api.fxtwitter.com
 allowed-tools: Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/unroll.py *)
 metadata:
-  version: "0.5.2"
+  version: "0.6.0"
 ---
 
 # unroll
@@ -40,7 +40,9 @@ Fetches an X/Twitter thread as Markdown (to stdout or a file) using the public F
 - `# Title` from the first line of the first tweet, then author and date
 - Each tweet's text, separated by `---`
 - Photos as `![](url)`, videos and GIFs as a thumbnail linking to the mp4
-- Quoted tweets as a `>` blockquote with a source link
+- Quoted tweets as a `>` blockquote with a source link; quote chains are followed and nested
+  (`> >`), up to 8 levels
+- X Articles (long posts) as their title and lead, with a link
 
 The output covers the reply chain around the linked tweet: the author's self-replies, plus
 other people's tweets the author was answering. When more than one person posts in it, each

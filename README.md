@@ -134,7 +134,7 @@ ok yeah
 ...
 ```
 
-In a thread with one author the `@handle` labels and `participants` are left out. Photos become `![](url)`. Videos and GIFs become a thumbnail that links to the mp4. Quoted tweets go into a `>` blockquote with a link back to the source.
+In a thread with one author the `@handle` labels and `participants` are left out. Photos become `![](url)`. Videos and GIFs become a thumbnail that links to the mp4. Quoted tweets go into a `>` blockquote with a link back to the source. If the quoted tweet quotes another one, the whole chain is followed and nested as `> >`, up to 8 levels. X Articles show their title and lead.
 
 ## Limits
 

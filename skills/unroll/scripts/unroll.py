@@ -14,6 +14,8 @@ import urllib.request
 from datetime import datetime, timezone
 
 API = "https://api.fxtwitter.com/2/thread/"
+STATUS_API = "https://api.fxtwitter.com/2/status/"
+MAX_QUOTE_DEPTH = 8
 
 
 def parse_id(value):
@@ -51,7 +53,24 @@ def collect_thread(tweet_id):
         raise RuntimeError(f"Failed to fetch thread {tweet_id}: {reason}")
     thread = data.get("thread") or [data["status"]]
     thread = [dict(t, text=strip_reply_mentions(t)) for t in thread]
+    for t in thread:
+        resolve_quotes(t)
     return sorted(thread, key=lambda t: t["created_timestamp"])
+
+
+def resolve_quotes(t, depth=1, seen=None):
+    """fxtwitter embeds only one level of quote: a quoted tweet comes without its own
+    quote. Fetch each quoted tweet to walk the chain, up to MAX_QUOTE_DEPTH levels."""
+    q = t.get("quote")
+    seen = seen if seen is not None else {t.get("id")}
+    if not q or not q.get("id") or q["id"] in seen or depth >= MAX_QUOTE_DEPTH:
+        return
+    seen.add(q["id"])
+    status, data = fetch_json(STATUS_API + q["id"])
+    inner = (data or {}).get("status", {}).get("quote") if status == 200 else None
+    if inner:
+        q["quote"] = inner
+        resolve_quotes(q, depth + 1, seen)
 
 
 def media_md(media):
@@ -67,19 +86,34 @@ def media_md(media):
     return "\n\n".join(out)
 
 
+def article_md(t):
+    """X Articles (long posts) come with empty text; show the title and lead instead."""
+    a = t.get("article") or {}
+    if not a.get("title"):
+        return ""
+    lead = (a.get("preview_text") or "").strip()
+    return f"**Article: {a['title']}**" + (f"\n\n{lead}" if lead else "")
+
+
 def quote_md(q):
+    """Quoted tweet as a blockquote. Quotes of quotes nest as > > ...."""
     if not q:
         return ""
-    parts = [f"**@{q['author']['screen_name']}**: {strip_reply_mentions(q)}", media_md(q.get("media"))]
-    body = "\n\n".join(p for p in parts if p)
-    lines = [f"> {line}" for line in body.split("\n")]
-    lines.append(f"> [source]({q['url']})")
-    return "\n".join(lines)
+    url = q.get("url") or f"https://x.com/i/status/{q.get('id')}"
+    if not q.get("author"):
+        body = "*quoted tweet unavailable*"
+    else:
+        text = strip_reply_mentions(q) if q.get("text") else ""
+        head = f"**@{q['author']['screen_name']}**" + (f": {text}" if text else "")
+        parts = [head, article_md(q), media_md(q.get("media")), quote_md(q.get("quote"))]
+        body = "\n\n".join(p for p in parts if p)
+    body += f"\n\n[source]({url})"
+    return "\n".join(f"> {line}" if line else ">" for line in body.split("\n"))
 
 
 def tweet_md(t, label_author):
     label = f"**@{t['author']['screen_name']}**" if label_author else ""
-    parts = [label, t["text"], media_md(t.get("media")), quote_md(t.get("quote"))]
+    parts = [label, t["text"], article_md(t), media_md(t.get("media")), quote_md(t.get("quote"))]
     return "\n\n".join(p for p in parts if p)
 
 
